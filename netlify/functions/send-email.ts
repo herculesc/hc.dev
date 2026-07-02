@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Método não permitido" }
+    return { statusCode: 405 }
   }
 
   try {
@@ -17,9 +17,9 @@ export const handler: Handler = async (event) => {
       subject: `Nova mensagem de ${nome}`,
       replyTo: email,
       html: `
-        <h2>Novo contato pelo portfólio</h2>
+        <h2>Novo contato</h2>
         <p><strong>Nome:</strong> ${nome}</p>
-        <p><strong>E-mail:</strong> ${email}</p>
+        <p><strong>Email:</strong> ${email}</p>
         <p><strong>Mensagem:</strong> ${mensagem}</p>
       `,
     })
@@ -28,9 +28,13 @@ export const handler: Handler = async (event) => {
 
     if (result.error) {
       console.error("RESEND ERROR:", result.error)
+
       return {
         statusCode: 500,
-        body: JSON.stringify({ success: false, error: result.error }),
+        body: JSON.stringify({
+          success: false,
+          error: result.error,
+        }),
       }
     }
 
@@ -46,7 +50,7 @@ export const handler: Handler = async (event) => {
       statusCode: 500,
       body: JSON.stringify({
         success: false,
-        message: "Erro ao enviar e-mail",
+        message: "Erro interno",
       }),
     }
   }
