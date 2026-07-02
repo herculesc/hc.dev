@@ -12,7 +12,7 @@ export const handler: Handler = async (event) => {
     const { nome, email, mensagem } = JSON.parse(event.body || "{}")
 
     const result = await resend.emails.send({
-      from: "Portfolio <onboarding@resend.dev>",
+      from: "onboarding@resend.dev",
       to: "herculesfreelaml@gmail.com",
       subject: `Nova mensagem de ${nome}`,
       replyTo: email,
