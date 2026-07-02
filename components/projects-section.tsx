@@ -8,7 +8,7 @@ const projects = [
     title: "Detecção de Áreas de Mineração",
     description:
       "Modelo de IA para detecção de áreas de mineração industrial com 96% de precisão.",
-    image: "/Identificar_mudanca.png",
+    image: "/mining_change.png",
     tags: ["Python", "PyTorch", "QGIS", "Sentinel-2"],
     featured: true,
   },
